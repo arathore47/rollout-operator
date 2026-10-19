@@ -144,6 +144,19 @@ How to **investigate**:
 - Since this fires before anything is actually being dropped, there is more room to act before impact: reduce the load at its source, or raise the limits. See [Kubernetes API client rate limiting](#kubernetes-api-client-rate-limiting)
 - If it keeps firing without ever tipping into the saturation alert, the limit may simply be sized close to normal peak load - consider raising it rather than treating every firing as an incident
 
+### rollout-operatorReplicaTemplateObserverNotReady
+
+This alert fires when `rollout_operator_replica_template_observer_ready` remains `0` for 5 minutes. It is disabled by default; enable it with `rollout_operator_replica_template_observer_alert_enabled` where ReplicaTemplates are used.
+
+The operator cannot discover the ReplicaTemplate resource and its `/scale` subresource. When ReplicaTemplate watches are enabled, readiness also requires initial cache synchronization and successful list/watch requests. StatefulSets referencing ReplicaTemplates may be unable to mirror their replica counts; pod rollouts continue.
+
+How to **investigate**:
+
+- Verify that `replicatemplates.rollout-operator.grafana.com` is installed and established, and that the CRD exposes its scale subresource:
+  `kubectl get crd replicatemplates.rollout-operator.grafana.com -o yaml`
+- Check Kubernetes API discovery access and availability. With watches enabled, check namespace list/watch permissions and `ReplicaTemplate watch failed` in the operator logs.
+- Discovery is checked every 30 seconds. Verify that the readiness metric returns to `1` and replica mirroring resumes. This metric does not guarantee that a referenced ReplicaTemplate exists or that its scale/status subresources are accessible.
+
 ## Metrics
 
 A Prometheus metrics endpoint is available at `/metrics` of the rollout-operator deployment.

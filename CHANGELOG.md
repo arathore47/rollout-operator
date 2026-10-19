@@ -2,6 +2,8 @@
 
 ## main / unreleased
 
+* [ENHANCEMENT] Add `rollout_operator_replica_template_observer_ready` metric and opt-in `ReplicaTemplateObserverNotReady` alert, reporting whether the ReplicaTemplate resource and its scale subresource are discoverable and, when enabled, whether the ReplicaTemplate watch is healthy. #PR
+
 ## v0.41.0
 
 * [ENHANCEMENT] Add ability to watch ReplicaTemplates so replica changes trigger scaling reconciliation without waiting for the informer re-sync. Enable with -replica-templates.watch-enabled=true. #503
