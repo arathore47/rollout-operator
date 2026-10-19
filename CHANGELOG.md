@@ -2,6 +2,8 @@
 
 ## main / unreleased
 
+* [ENHANCEMENT] Add `rollout_operator_zpdb_config_observer_ready` metric and `ZpdbConfigObserverNotReady` alert, reporting whether the ZPDB config observer can access ZPDBs and has synced. #530
+
 ## v0.41.0
 
 * [ENHANCEMENT] Add ability to watch ReplicaTemplates so replica changes trigger scaling reconciliation without waiting for the informer re-sync. Enable with -replica-templates.watch-enabled=true. #503
