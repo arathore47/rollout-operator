@@ -2,7 +2,7 @@
 
 ## main / unreleased
 
-* [ENHANCEMENT] Add `rollout_operator_replica_template_observer_ready` metric and opt-in `ReplicaTemplateObserverNotReady` alert, reporting whether the ReplicaTemplate resource and its scale subresource are discoverable and, when enabled, whether the ReplicaTemplate watch is healthy. #PR
+* [ENHANCEMENT] Add `rollout_operator_replica_template_observer_ready` metric and opt-in `ReplicaTemplateObserverNotReady` alert, reporting whether the ReplicaTemplate resource and its scale subresource are discoverable and, when enabled, whether the ReplicaTemplate watch is healthy. #531
 
 ## v0.41.0
 
